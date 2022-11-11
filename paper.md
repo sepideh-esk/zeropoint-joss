@@ -28,7 +28,7 @@ authors:
 affiliations:
  - name: Centro de Estudios de Física del Cosmos de Aragón (CEFCA), Plaza San Juan 1, 44001 Teruel, Spain
    index: 1
- - name: Valladolid
+ - name: Dept. of Theoretical and Atomic Physics, and Optics, University of Valladolid, Spain
    index: 2
  - name: Instituto de Astrofísica de Canarias, Calle Vía Láctea s/n, 38205 La Laguna, Spain
    index: 3
