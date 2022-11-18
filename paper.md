@@ -5,7 +5,7 @@ tags:
   - astronomy
   - zeropoint
 authors:
-  - name: Sepdieh Eskandarlou
+  - name: Sepideh Eskandarlou
     orcid: 0000-0002-6672-1199
     corresponding: true
     equal-contrib: true
@@ -23,6 +23,7 @@ authors:
     affiliation: "3, 4"
     equal-contrib: true
   - name: Mohammad Akhlaghi
+    orcid: 0000-0003-1710-6613
     affiliation: 1
     equal-contrib: true
 affiliations:
