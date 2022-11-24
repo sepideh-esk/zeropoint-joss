@@ -47,13 +47,15 @@ bibliography: paper.bib
 
 
 # Summary
-
 Estimating the zero point is crucial calibration step in image processing.
 Moreover, zero point is essential to calibrate magnitude to standard magnitude.
+More details are fully explained in \url{https://www.gnu.org/savannah-checkouts/gnu/gnuastro/manual/gnuastro.html#Brightness-flux-magnitude}.
 Formerly, Vega star's magnitude was used as zeropoint magnitude for obtaining the standard magnitude.
 But Vega star is not eternaly in the sky, and it can not be used as reference of zero point magnitude.
 Predominantly, any star that is in the sky can be used to obtain the zero point by using its apparent magnitude.
-More details are fully explained in \url{https://www.gnu.org/software/gnuastro/manual/gnuastro.html#Brightness-flux-magnitude}.
+
+Gnuastro’s @command{astscript-zeropoint} script is created to obtain zero point of an image of a device, based on the
+ image or catalog of another device that overlap with original image and their zero point are known.
 
 
 
