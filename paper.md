@@ -19,6 +19,9 @@ authors:
   - name: Zahra Sharbaf
     affiliation: "3, 4"
     equal-contrib: true
+  - name: Giulia Golini
+    affiliation: "3, 4"
+    equal-contrib: true
   - name: Zohre Ghafari
     affiliation: "3, 4"
     equal-contrib: true
@@ -45,9 +48,12 @@ bibliography: paper.bib
 
 # Summary
 
-Estimating the zeropoint is a crucial calibration step in astronimical image processing.
-
-
+Estimating the zero point is crucial calibration step in image processing.
+Moreover, zero point is essential to calibrate magnitude to standard magnitude.
+Formerly, Vega star's magnitude was used as zeropoint magnitude for obtaining the standard magnitude.
+But Vega star is not eternaly in the sky, and it can not be used as reference of zero point magnitude.
+Predominantly, any star that is in the sky can be used to obtain the zero point by using its apparent magnitude.
+More details are fully explained in \url{https://www.gnu.org/software/gnuastro/manual/gnuastro.html#Brightness-flux-magnitude}.
 
 
 
