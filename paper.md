@@ -52,44 +52,40 @@ Because magnitude is the thing we directly measure from the image pixels and cre
 Owing to this, estimating the zero point is essential in calibration step of image processing.
 Formerly, Vega star's magnitude was used as zeropoint magnitude for obtaining the standard magnitude.
 But Vega star is not eternaly in the sky, and it can not be used as reference of zero point magnitude.
-These days, instead of Vega’s magnitude, AB magnitude standard is used for calibration.
+These days, instead of Vega’s magnitude, AB magnitude standard is used for calibration \footnote{https://www.gnu.org/savannah-checkouts/gnu/gnuastro/manual/html\_node/Brightness-flux-magnitude.html}.
 Gnuastro’s astscript-zeropoint script is created to obtain zero point of an image of a device based on the AB magnitude standard, based on the image or catalog of another device that overlap with original image and their zero point are known.
 
 
 # Statement of need
 
-Gnuastro [@gnuastro] is free open source software with a large collection of programs and libraries that that facilitates according to GNU standards.
-for astronomical data analysis \footnote{https://www.gnu.org/savannah-checkouts/gnu/gnuastro}.
-Entire Gnuastro's programs run on the command line.
-Gnuastro has a very complete manual, the latest version of which is always on the website.
-One of these programs is astscript-zeropoint script which is created to obtain zero point of an image in a device, based on the image or catalog of another device that overlap with original image and their zero point are known.
-More the details of this script are explaines in XXXXciteXXXX.
-
-Estimating the zero point is crucial calibration step in image processing.
-Why is the zero point important?
-Flux and luminosity are congenital properties of astronomical objects.
-While brightness and magnitude of an object depends on the tool which object is detected.
-Depending on the instrument and tools, the brightness and magnitude of an object will change.
-Due to it, in observational astronomy data analysis, mostly brightness and magnitude are discussed.
-The essential thing here is that the magnitude is the same as the brightness which is reported in logarithem unit.
-In order to magnitude of an objecets to be dimensionless, its brightness is divided by the reference brightness.
-The amount of the reference brigntness is considered to be one, therefore reference magnitude commonly known as zero point magnitude.
+Estimating the zero point is crucial in calibration of image processing.
+Because brightness and magnitude of an object depends on the tool which object is detected and its calibration.
 Zero point magnitude describe whole the hardware-specific which causes the difference in the magnitude of an object in differ images.
+`astscript-zeropoint` is useful tool for calibrating images in astronomy.
+More the details of this script are explaines in XXXXciteXXXX.
+This script is created to calibrate the astronomical images in a device, based on the image or catalog of another device in Gnuastro.
+It is now being used by other research groups such as [@nacho2021] [@martinez2021], to obtine the zero point of astronomical imges.
+
+Gnuastro [@gnuastro] is free open source software with a large collection of programs and libraries that facilitates according to GNU standards for astronomical data analysis \footnote{https://www.gnu.org/savannah-checkouts/gnu/gnuastro}.
+Entire Gnuastro's programs run on the command line.
+Gnuastro has a very complete manual, the latest version of which is always on the website \footnote{https://akhlaghi.org/gnuastro.pdf}.
+
 
 # Example
 
 To find the zero point, it is common to use photometric systems with defined zero points such as some images or catalogs.
 For example, the SDSS data can be a good reference for finding zero point in optical and 2MASS data for near infra-red images.
 
+```bash
 ## Zero point based on the reference image
-
 $ astscript-zeropoint image.fits --hdu=1 \
                       --reference=ref-img1.fits,ref-img2.fits \
                       --referencehdu=1,1 --referencezp=22.5,22.5 \
                       --aperarcsec=1.5,2,2.5,3 \
                       --magnituderange=16,18 \
                       --output=output.fits
-
+```
+```bash
 ## Zero point based on the reference catalog
 
 $ astscript-zeropoint image.fits --hdu=1 \
@@ -97,6 +93,8 @@ $ astscript-zeropoint image.fits --hdu=1 \
                                  --aperarcsec=1.5,2,2.5,3 \
                                  --magnituderange=16,18 \
                                  --output=output.fits
+```
+
 
 # Acknowledgements
 
