@@ -10,21 +10,21 @@ authors:
     corresponding: true
     equal-contrib: true
     affiliation: 1
+  - name: Elham Saremi
+    affiliation: "2, 3"
+    equal-contrib: true
   - name: Samane Raji
     equal-contrib: true
-    affiliation: 2
-  - name: Elham Saremi
-    affiliation: "3, 4"
-    equal-contrib: true
-  - name: Zahra Sharbaf
-    affiliation: "3, 4"
-    equal-contrib: true
+    affiliation: 4
   - name: Giulia Golini
-    affiliation: "3, 4"
-    equal-contrib: true
+    affiliation: "2, 3"
+    equal-contrib: false
+  - name: Zahra Sharbaf
+    affiliation: "2, 3"
+    equal-contrib: false
   - name: Zohreh Ghafari
-    affiliation: "3, 4"
-    equal-contrib: true
+    affiliation: "2, 3"
+    equal-contrib: false
   - name: Mohammad Akhlaghi
     orcid: 0000-0003-1710-6613
     affiliation: 1
@@ -32,11 +32,11 @@ authors:
 affiliations:
  - name: Centro de Estudios de Física del Cosmos de Aragón (CEFCA), Plaza San Juan 1, 44001 Teruel, Spain
    index: 1
- - name: Dept. of Theoretical and Atomic Physics, and Optics, University of Valladolid, Spain
-   index: 2
  - name: Instituto de Astrofísica de Canarias, Calle Vía Láctea s/n, 38205 La Laguna, Spain
-   index: 3
+   index: 2
  - name: Departamento de Astrofísica, Universidad de La Laguna, 38205 La Laguna, Spain
+   index: 3
+ - name: Dept. of Theoretical and Atomic Physics, and Optics, University of Valladolid, Spain
    index: 4
 date: 11 November 2022
 bibliography: paper.bib
@@ -47,19 +47,16 @@ bibliography: paper.bib
 
 
 # Summary
-In observational astronomy data analysis, magnitude calibration is one of the vital issue.
-Because magnitude is the thing we directly measure from the image pixels and create in catalogs.
-Owing to this, estimating the zero point is essential in calibration step of image processing.
-Formerly, Vega star's magnitude was used as zeropoint magnitude for obtaining the standard magnitude.
-But Vega star is not eternaly in the sky, and it can not be used as reference of zero point magnitude.
-These days, instead of Vega’s magnitude, AB magnitude standard is used for calibration \footnote{https://www.gnu.org/savannah-checkouts/gnu/gnuastro/manual/html\_node/Brightness-flux-magnitude.html}.
-Gnuastro’s astscript-zeropoint script is created to obtain zero point of an image of a device based on the AB magnitude standard, based on the image or catalog of another device that overlap with original image and their zero point are known.
+In observational astronomy data analysis, magnitude calibration is one of the vital issues.
+Because magnitude is one of the lowest-level direct measurements on image pixels to generate catalogs used in higher-level analysis (like measuring the galaxy stellar mass or spectral energy distribution fitting).
+This paper introduces a newly added feature in GNU Astronomy Utilities (Gnuastro) for automating this job: `astscript-zeropoint`.
+This script has many features: 1. The reference can either be an image or a catalog, 2. It runs in parallel, 3. its only relies on Gnuastro's mandatory dependencies (three very low-level and portable C-based libraries), making it portable and usable with minimal/optimal run-time resources.
 
 
 # Statement of need
 
 Estimating the zero point is crucial in calibration of image processing.
-Because brightness and magnitude of an object depends on the tool which object is detected and its calibration.
+Because the measured flux of an object in our detectors depends on many factors (from the quantum efficiency of each pixel, to the transmission curve of the filter, to the optical system, to the atmosphere).
 Zero point magnitude describe whole the hardware-specific which causes the difference in the magnitude of an object in differ images.
 `astscript-zeropoint` is useful tool for calibrating images in astronomy.
 More the details of this script are explaines in XXXXciteXXXX.
