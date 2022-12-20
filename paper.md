@@ -63,28 +63,42 @@ More the details of this script are explaines in XXXXciteXXXX.
 This script is created to calibrate the astronomical images in a device, based on the image or catalog of another device in Gnuastro.
 It is now being used by other research groups such as [@nacho2021] [@martinez2021], to obtine the zero point of astronomical imges.
 
+`astscript-zeropoint` is one of the Gnuastro programs.
 Gnuastro [@gnuastro] is free open source software with a large collection of programs and libraries that facilitates according to GNU standards for astronomical data analysis \footnote{https://www.gnu.org/savannah-checkouts/gnu/gnuastro}.
 Entire Gnuastro's programs run on the command line.
 Gnuastro has a very complete manual, the latest version of which is always on the website \footnote{https://akhlaghi.org/gnuastro.pdf}.
 
+# Using the `astscript-zeropoint`
+To find the zero point, it is common to use photometric systems with defined zero points such as some images or catalogs. By using this script, the zero point can be determined by catlaog and image.
+All the steps to obtain the zero point are as follows:
 
-# Example
+1. Download Gaia catalog by Gnuastro's query program to determine the coordinate of stars in image.
+2. Prepare the reference image or catalog.
+3. If an image is selected as a reference, aperture photometry should be performed for it by MakeProfile and MakeCatalog of Gnuastro programs.
+4. Match catalog to obtain differences of magnitudes in two catalogs and estimate zero point value.
 
-To find the zero point, it is common to use photometric systems with defined zero points such as some images or catalogs.
-For example, the SDSS data can be a good reference for finding zero point in optical and 2MASS data for near infra-red images.
+Example of both methods is given below if the reference be as image or be as a catalog.
+
+# Example 1: Zero point based on the reference image
+
+If you want to obtain the zeropoint of an image (`img.fits`) based on the reference images (`refimg-1.fits` and `refimg-2.fits`) by below command the zero point will be obtian easily. The output save in the `output.fits`.
 
 ```bash
 ## Zero point based on the reference image
-$ astscript-zeropoint image.fits --hdu=1 \
-                      --reference=ref-img1.fits,ref-img2.fits \
+$ astscript-zeropoint img.fits --hdu=1 \
+                      --reference=refimg-1.fits,refimg-2.fits \
                       --referencehdu=1,1 --referencezp=22.5,22.5 \
                       --aperarcsec=1.5,2,2.5,3 \
                       --magnituderange=16,18 \
                       --output=output.fits
 ```
+
+# Example 1: Zero point based on the reference catalog
+
+If you want to obtain the zero point of an image (`image.fits`) based on the reference catalog (`cat.fits`), by inserting the flollowing command line the zero point of `image.fits` will be obtainded.
+
 ```bash
 ## Zero point based on the reference catalog
-
 $ astscript-zeropoint image.fits --hdu=1 \
                                  --catalog=cat.fits --cataloghdu=1 \
                                  --aperarcsec=1.5,2,2.5,3 \
@@ -94,6 +108,7 @@ $ astscript-zeropoint image.fits --hdu=1 \
 
 
 # Acknowledgements
+Authors gratefully acknowledge Ingacio Trujillo for his good advice and discussion.
 
 We acknowledge contributions from Brigitta Sipocz, Syrtis Major, and Semyeong
 Oh, and support from Kathryn Johnston during the genesis of this project.
