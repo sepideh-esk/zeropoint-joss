@@ -20,10 +20,10 @@ authors:
   - name: Samane Raji
     equal-contrib: true
     affiliation: 4
-  - name: Giulia Golini
+  - name: Zahra Sharbaf
     affiliation: "2, 3"
     equal-contrib: false
-  - name: Zahra Sharbaf
+  - name: Giulia Golini
     affiliation: "2, 3"
     equal-contrib: false
   - name: Zohreh Ghafari
@@ -94,8 +94,8 @@ Save the result as `output.fits`.
 
 ```bash
 $ astscript-zeropoint img.fits --hdu=1 \
-                      --reference=ref-image-1.fits,ref-image-2.fits \
-                      --referencehdu=1,1 --referencezp=22.5,22.5 \
+                      --refimgs=ref-image-1.fits,ref-image-2.fits \
+                      --refimgshdu=1,1 --referencezp=22.5,22.5 \
                       --aperarcsec=1.5,2,2.5,3 \
                       --magnituderange=16,18 \
                       --output=output.fits
@@ -111,7 +111,7 @@ Save the result as `output.fits`.
 
 ```bash
 $ astscript-zeropoint image.fits --hdu=1 \
-                      --catalog=cat.fits --cataloghdu=1 \
+                      --refcat=cat.fits --refcathdu=1 \
                       --aperarcsec=1.5,2,2.5,3 \
                       --magnituderange=16,18 \
                       --output=output.fits
