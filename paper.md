@@ -26,7 +26,7 @@ authors:
   - name: Giulia Golini
     affiliation: "2, 3"
     equal-contrib: false
-  - name: Zohreh Ghafari
+  - name: Zohreh Ghaffari
     affiliation: "2, 3"
     equal-contrib: false
   - name: Mohammad Akhlaghi
