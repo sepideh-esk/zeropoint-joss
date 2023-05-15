@@ -52,50 +52,50 @@ bibliography: paper.bib
 
 # Summary
 The photometric calibration (zero point magnitude estimation) is a fundamental step in astronomical data analysis.
-The zero point magnitude is the connection between the observed data with a photometric system.
-It encodes all the instrument-specific and observational factors into a single value that allows the use of the data for higher-level analysis (e.g., measuring the galaxy stellar masses or spectral energy distribution fitting).
+The zero point magnitude therefore allows the conversion of the observed data (pixel values) to physical units.
 This paper introduces a newly added script in GNU Astronomy Utilities (Gnuastro) for automating this job: `astscript-zeropoint`.
 This script has many features: 1. The reference dataset can be either an image or a catalog, 2. It runs in parallel, 3. Its few dependencies makes it portable and usable with minimal/optimal run-time resources.
 
 
 # Introduction
 Useful measurements of astronomical sources are not possible without the reduction and the calibration of the raw data.
-The estimation of the zero point consists in making the connection between the observed data to a standard photometric system.
+The estimation of the zero point consists in making the connection between the observed data to physical units.
+The zero point encodes all the instrument-specific and observational factors into a single value that allows the use of the data for higher-level analysis (e.g., measuring the galaxy stellar masses or spectral energy distribution fitting).
 After that, the measured values like fluxes, brightness, and other parameters have physical meaning and can be compared with other measurements from different telescopes and instruments.
 
 Here we introduce a new script in charge of computing the zero point magnitude of astronomical images: `astscript-zeropoint`.
 It performs the aperture photometry of the objects and compares them with already calibrated datasets (images or catalog).
-This script belongs to GNU Astronomy Utilities (Gnuastro) \footnote{https://www.gnu.org/software/gnuastro} [@gnuastro2015; @gnuastro2019] since Gnuastro version $0.20$.
-This script is now being used by other research groups such as @trujillo2021 and @martinez2021 to obtain the zero point of their astronomical images.
+This script is a new component of GNU Astronomy Utilities, or Gnuastro\footnote{\url{https://www.gnu.org/software/gnuastro}} [@gnuastro2015; @gnuastro2019] since Gnuastro version $0.20$.
+Earlier versions of this script have been used by other research projects such as @trujillo2021 and @martinez2021 to obtain the zero point of their astronomical images.
 
 
 # Computing the zero point with `astscript-zeropoint`
-Prior to the use of this script, it is necessary to collect the reference images or catalog.
+Before running this script, it is necessary to collect the reference images or catalog that overlap with your input image.
 This reference data is used as the basis to compare the aperture photometry done by the script.
-The basic steps performed internally by the script:
+The basic steps performed internally by the script are:
 
-1. Download Gaia catalog to obtain accurate coordinates of stars on the input image.
-2. Perform aperture photometry considering different aperture sizes (option `--aperarcsec`).
-3. For each aperture size, compute the difference in magnitude with respect to the reference data.
-4. Compute the zero point magnitude as the robust averaged difference between the magnitudes.
-5. Finally, select the zero point from the aperture size that provides the smaller standard deviation.
+1. Query the Gaia\footnote{Gaia is a mission by the European Space Agency for cataloging positions, distances, motion and spectra of stars in Milky Way. For more information, see \url{https://www.esa.int/Science_Exploration/Space_Science/Gaia}.} catalog to obtain accurate coordinates of stars on the input image.
+2. Perform aperture photometry considering different aperture sizes.
+3. For each aperture, compute the difference in magnitude with respect to the reference.
+4. Compute the zero point magnitude from the diffrence in all stars.
+5. Finally, select the zero point from the aperture that gives the smaller scatter.
 
-Depending on the reference data, images or a catalog, the way of using the script is a bit different.
+Depending on the reference data (images or a catalog) the way of using the script is slightly different.
 But in practice, the essence is the same.
 In what follows, we expose two examples on how to invoke the script in order to obtain the zero point magnitude of an image.
 
 
 ### Example 1: Zero point based on reference images
 Obtain the zero point of an image (`img.fits`) based on reference images (`refimg-1.fits` and `refimg-2.fits`) that overlap with `img.fits`.
-In this case, the reference images have zero points of 22.5 mag each.
-Consider 4 different apertures of 1.5, 2, 2.5, and 3 arcsec.
-Use objects within the range of magnitude from 16 to 18 mag.
+In this case, the reference images have zero points of 22.5 magitudes each.
+Consider 4 different apertures of radii 1.5, 2, 2.5, and 3 arc seconds.
+Use objects within the range of magnitude from 16 to 18 magnitudes.
 Save the result as `output.fits`.
 
 ```bash
 $ astscript-zeropoint img.fits --hdu=1 \
                       --refimgs=ref-image-1.fits,ref-image-2.fits \
-                      --refimgshdu=1,1 --referencezp=22.5,22.5 \
+                      --refimgshdu=1,1 --refimgszp=22.5,22.5 \
                       --aperarcsec=1.5,2,2.5,3 \
                       --magnituderange=16,18 \
                       --output=output.fits
@@ -104,10 +104,7 @@ $ astscript-zeropoint img.fits --hdu=1 \
 
 ### Example 2: Zero point based on a reference catalog
 Obtain the zero point of an image (`img.fits`) based on a reference catalog (`cat.fits`) whose objects overlap with `img.fits`.
-In this case, the reference is a catalog of objects.
-Consider 4 different apertures of 1.5, 2, 2.5, and 3 arcsec.
-Use objects within the range of magnitude from 16 to 18 mag.
-Save the result as `output.fits`.
+The aperture sizes, magnitude range and output name are same as Example 1.
 
 ```bash
 $ astscript-zeropoint image.fits --hdu=1 \
@@ -119,13 +116,13 @@ $ astscript-zeropoint image.fits --hdu=1 \
 
 
 # Further information
-More details and information including a full step by step tutorial on how to use this script can be found in the official documentation of Gnuastro.
-The latest version is always on the website \url{https://akhlaghi.org/gnuastro.pdf}.
+More details and complete information (including two full step-by-step tutorials on how to use this script and the concepts behind it) can be found in the respective section\footnote{\url{https://www.gnu.org/software/gnuastro/manual/html_node/Zero-point-estimation.html}} official documentation of Gnuastro.
 Gnuastro's source code is released under the GNU General Public License version three or above (GPLv3+) and is hosted as a \href{https://git.savannah.gnu.org/cgit/gnuastro.git}{Git repository} on Savannah.
-
+For installation instructions see the "Quick start" section\footnote{\url{https://www.gnu.org/software/gnuastro/manual/html_node/Quick-start.html}}.
 
 # Acknowledgements
-We acknowledge Ignacio Trujillo for the good advice and discussions that improved the script.
+We gratefully acknowledge Ignacio Trujillo for the good advice and discussions that improved the script.
 
+This work is part of GNU Astronomy Utilities (Gnuastro, ascl.net/1801.009) version 0.20. Work on Gnuastro has been funded by the Japanese Ministry of Education, Culture, Sports, Science, and Technology (MEXT) scholarship and its Grant-in-Aid for Scientific Research (21244012, 24253003), the European Research Council (ERC) advanced grant 339659-MUSICOS, the Spanish Ministry of Economy and Competitiveness (MINECO, grant number AYA2016-76219-P) and the NextGenerationEU grant through the Recovery and Resilience Facility project ICTS-MRR-2021-03-CEFCA.
 
 # References
